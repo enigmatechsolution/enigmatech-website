@@ -1,0 +1,317 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EnigmaStock Application Screenshots | Enigmatech Solutions</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+
+        /* Gallery heading */
+        .gallery-header {
+            text-align: center;
+            padding: 65px 20px;
+            background: #f5f7fa;
+        }
+
+            .gallery-header h1 {
+                color: var(--navy);
+                font-size: 38px;
+                margin: 28px 0 14px;
+            }
+
+            .gallery-header p {
+                color: var(--muted);
+                font-size: 17px;
+            }
+
+        /* Wider gallery layout */
+        .gallery-carousel {
+            position: relative;
+            width: 100%;
+            margin: 55px auto 25px;
+        }
+
+        /* Screenshot spacing and scrolling */
+        .screenshot-track {
+            display: flex;
+            gap: 35px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            padding: 25px 15px 40px;
+            scrollbar-width: none;
+        }
+
+            .screenshot-track::-webkit-scrollbar {
+                display: none;
+            }
+
+        /* Larger screenshot cards */
+        .screenshot-slide {
+            flex: 0 0 420px;
+            scroll-snap-align: center;
+            padding: 20px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+            .screenshot-slide:hover {
+                transform: translateY(-7px);
+            }
+
+            /* Larger images, without cropping */
+            .screenshot-slide img {
+                display: block;
+                width: 100%;
+                height: 460px;
+                object-fit: contain;
+                cursor: zoom-in;
+                transition: transform 0.3s ease;
+            }
+
+                .screenshot-slide img:hover {
+                    transform: scale(1.03);
+                }
+
+            .screenshot-slide h3 {
+                color: var(--navy);
+                font-size: 19px;
+                margin-top: 20px;
+            }
+
+        /* Navigation arrows */
+        .gallery-arrow {
+            position: absolute;
+            top: 45%;
+            z-index: 5;
+            width: 52px;
+            height: 52px;
+            border: none;
+            border-radius: 50%;
+            background: var(--navy);
+            color: white;
+            font-size: 23px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+            .gallery-carousel:hover .gallery-arrow,
+            .gallery-arrow:focus-visible {
+                opacity: 1;
+            }
+
+            .gallery-arrow.prev {
+                left: -18px;
+            }
+
+            .gallery-arrow.next {
+                right: -18px;
+            }
+
+        /* Instruction below gallery */
+        .gallery-hint {
+            text-align: center;
+            color: var(--muted);
+            font-size: 15px;
+            margin: 15px 0 60px;
+        }
+
+        /* Fullscreen image viewer */
+        .image-viewer {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: rgba(10, 12, 30, 0.97);
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+        }
+
+            .image-viewer img {
+                max-width: 94vw;
+                max-height: 92vh;
+                width: auto;
+                height: auto;
+                object-fit: contain;
+                border-radius: 8px;
+            }
+
+        .close-viewer {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            background: transparent;
+            color: white;
+            border: none;
+            font-size: 45px;
+            cursor: pointer;
+        }
+
+        /* Tablet and mobile adjustments */
+        @media (max-width: 768px) {
+            .gallery-header {
+                padding: 45px 15px;
+            }
+
+                .gallery-header h1 {
+                    font-size: 29px;
+                }
+
+            .screenshot-slide {
+                flex: 0 0 88%;
+                padding: 15px;
+            }
+
+                .screenshot-slide img {
+                    height: 380px;
+                }
+
+            .gallery-arrow {
+                display: none;
+            }
+
+            .gallery-carousel {
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="gallery-header">
+        <a href="index.html" class="btn btn-primary">
+            ← Back to Homepage
+        </a>
+
+        <h1>Explore EnigmaStock</h1>
+
+        <p>
+            Discover the features of our inventory and sales management application.
+        </p>
+    </header>
+
+    <main class="container">
+
+        <div class="gallery-carousel">
+
+            <button class="gallery-arrow prev"
+                    onclick="moveGallery(-1)"
+                    aria-label="Previous screenshots">
+                &#10094;
+            </button>
+
+            <div class="screenshot-track" id="screenshotTrack">
+
+                <div class="screenshot-slide">
+                    <img src="images/enigmastock-features.png"
+                         alt="EnigmaStock Features"
+                         onclick="openImage(this)">
+
+                    <h3>Key Features</h3>
+                </div>
+
+                <div class="screenshot-slide">
+                    <img src="images/enigmastock-dashboard.png"
+                         alt="EnigmaStock Dashboard"
+                         onclick="openImage(this)">
+
+                    <h3>Business Dashboard</h3>
+                </div>
+
+                <div class="screenshot-slide">
+                    <img src="images/enigmastock-invoice.png"
+                         alt="EnigmaStock Sales Invoice"
+                         onclick="openImage(this)">
+
+                    <h3>Sales Invoice</h3>
+                </div>
+
+                <div class="screenshot-slide">
+                    <img src="images/enigmastock-product.png"
+                         alt="EnigmaStock Product Management"
+                         onclick="openImage(this)">
+
+                    <h3>Product Management</h3>
+                </div>
+
+            </div>
+
+            <button class="gallery-arrow next"
+                    onclick="moveGallery(1)"
+                    aria-label="Next screenshots">
+                &#10095;
+            </button>
+
+        </div>
+
+        <p class="gallery-hint">
+            Explore horizontally or swipe on mobile. Click any screenshot to enlarge.
+        </p>
+
+    </main>
+
+
+    <!-- Fullscreen Image Viewer -->
+    <div id="imageViewer"
+         class="image-viewer"
+         onclick="closeImage()">
+
+        <button class="close-viewer"
+                onclick="closeImage()"
+                aria-label="Close image">
+            &times;
+        </button>
+
+        <img id="expandedImage"
+             src=""
+             alt="Expanded EnigmaStock screenshot"
+             onclick="event.stopPropagation()">
+    </div>
+
+    <!-- Gallery JavaScript -->
+    <script>
+        function moveGallery(direction) {
+            const track = document.getElementById("screenshotTrack");
+
+            track.scrollBy({
+                left: direction * 310,
+                behavior: "smooth"
+            });
+        }
+
+        function openImage(image) {
+            const viewer = document.getElementById("imageViewer");
+            const expandedImage = document.getElementById("expandedImage");
+
+            expandedImage.src = image.src;
+            viewer.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeImage() {
+            document.getElementById("imageViewer").style.display = "none";
+            document.body.style.overflow = "";
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                closeImage();
+            }
+        });
+    </script>
+
+</body>
+</html>
+
